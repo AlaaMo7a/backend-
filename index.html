@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Backend Test</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #1f2937;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border: 1px solid #dbe3ee;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      color: #2563eb;
+    }
+
+    p {
+      color: #6b7280;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      min-height: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Backend Test</h1>
+    <p>Click the button to test if your backend is working.</p>
+
+    <button onclick="testBackend()">Test Backend</button>
+
+    <div id="result">No response yet</div>
+  </div>
+
+  <script>
+    async function testBackend() {
+      const result = document.getElementById("result");
+      result.textContent = "Loading...";
+
+      try {
+        const response = await fetch("/api/hello");
+        const data = await response.json();
+        result.textContent = data.message;
+      } catch (error) {
+        result.textContent = "Error: backend not working";
+      }
+    }
+  </script>
+</body>
+</html>
